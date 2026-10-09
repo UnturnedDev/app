@@ -1,0 +1,70 @@
+.grid {
+    animation: grid-pan 6s linear infinite;
+}
+
+.icon {
+    animation: bob 8s ease-in-out infinite;
+}
+
+.glow {
+    animation: glow-pulse 6s ease-in-out infinite;
+}
+
+.block {
+    animation: float-up var(--duration) linear infinite;
+}
+
+@keyframes grid-pan {
+    to {
+        background-position:
+            48px 48px,
+            48px 48px,
+            0 0;
+    }
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10%,
+    85% {
+        opacity: var(--block-opacity);
+    }
+    100% {
+        transform: translateY(-120vh) rotate(90deg);
+        opacity: 0;
+    }
+}
+
+@keyframes bob {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-1.5deg);
+    }
+    50% {
+        transform: translateY(-18px) rotate(1.5deg);
+    }
+}
+
+@keyframes glow-pulse {
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.12);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .grid,
+    .icon,
+    .glow,
+    .block {
+        animation: none;
+    }
+}

@@ -51,6 +51,7 @@ export default async function Home() {
                     const res = await auth.api.signOut({
                         headers: await headers(),
                     });
+
                     if (!res.success) {
                         throw new Error('Failed to sign out');
                     }
