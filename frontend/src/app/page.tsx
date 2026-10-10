@@ -1,66 +1,37 @@
-import { auth } from '@/auth';
-import { getSession } from '@/auth/server';
+import { BrandBackdrop } from '@/components/elements/brand-backdrop/brand-backdrop';
 import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
-import { revalidatePath } from 'next/cache';
-import { headers } from 'next/headers';
-import { redirect } from 'next/navigation';
 
-export default async function Home() {
-    const session = await getSession();
-
-    if (!session) {
-        return (
-            <main>
-                <h1>Sign in to get started</h1>
-                <form
-                    action={async () => {
-                        'use server';
-                        const res = await auth.api.signInSocial({
-                            body: {
-                                provider: 'discord',
-                            },
-                        });
-                        if (!res.url) {
-                            throw new Error(
-                                'No URL returned from socialSignIn',
-                            );
-                        }
-
-                        redirect(res.url);
-                    }}
-                >
-                    <Button type="submit">Sign in w/ Discord</Button>
-                </form>
-            </main>
-        );
-    }
-
+export default function HomePage() {
     return (
         <main>
-            <h1>Welcome back, {session.user.name}!</h1>
-            <form
-                action={async () => {
-                    'use server';
-                    const res = await auth.api.signOut({
-                        headers: await headers(),
-                    });
+            <section className="relative isolate overflow-hidden">
+                <BrandBackdrop
+                    className="absolute inset-0 -z-10"
+                    showBrandIcon={false}
+                />
 
-                    if (!res.success) {
-                        throw new Error('Failed to sign out');
-                    }
-
-                    revalidatePath('/', 'page');
-                }}
-            >
-                <Button type="submit">Sign out</Button>
-            </form>
+                <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-32 text-center text-primary-foreground">
+                    <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+                        Welcome to Unturned.dev
+                    </h1>
+                    <p className="text-lg text-primary-foreground max-w-md">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Nulla omnis eos fuga nemo magni reiciendis laboriosam
+                    </p>
+                    <div className="flex gap-3">
+                        <Button size="lg" variant="secondary">
+                            Get started
+                        </Button>
+                        <Button
+                            size="lg"
+                            variant="outline"
+                            className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                        >
+                            Learn more
+                        </Button>
+                    </div>
+                </div>
+            </section>
         </main>
     );
 }

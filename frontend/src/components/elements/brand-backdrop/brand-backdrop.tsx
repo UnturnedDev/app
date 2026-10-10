@@ -1,8 +1,8 @@
+import { cn } from '@/lib/utils';
 import type { CSSProperties } from 'react';
-import styles from './auth-backdrop.module.css';
+import styles from './brand-backdrop.module.css';
 import { BrandWhiteIcon } from '@/components/icons/brand/white-icon';
 
-// Fixed values (no Math.random) so server and client render identically.
 const BLOCKS = [
     { left: '8%', size: 28, duration: 18, delay: -2, opacity: 0.35 },
     { left: '18%', size: 14, duration: 14, delay: -9, opacity: 0.25 },
@@ -16,11 +16,20 @@ const BLOCKS = [
     { left: '93%', size: 26, duration: 20, delay: -16, opacity: 0.25 },
 ];
 
-export function AuthBackdrop() {
+type BrandBackdropProps = {
+    /** Controls layout/positioning, e.g. "hidden lg:block" or "absolute inset-0 -z-10". */
+    className?: string;
+    showBrandIcon?: boolean;
+};
+
+export function BrandBackdrop({
+    className,
+    showBrandIcon = true,
+}: BrandBackdropProps) {
     return (
         <div
             aria-hidden="true"
-            className="relative hidden overflow-hidden bg-primary lg:block"
+            className={cn('relative overflow-hidden bg-primary', className)}
         >
             {/* Base gradient + panning grid */}
             <div
@@ -38,14 +47,16 @@ export function AuthBackdrop() {
             />
 
             {/* Centered brand mark with a pulsing glow behind it */}
-            <div className="absolute inset-0 flex items-center justify-center">
-                <div
-                    className={`absolute size-104 rounded-full bg-sky-300/30 blur-3xl ${styles.glow}`}
-                />
-                <BrandWhiteIcon
-                    className={`relative w-[55%] max-w-md text-white drop-shadow-[0_0_40px_oklch(0.8_0.12_262/0.6)] ${styles.icon}`}
-                />
-            </div>
+            {showBrandIcon && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div
+                        className={`absolute size-104 rounded-full bg-sky-300/30 blur-3xl ${styles.glow}`}
+                    />
+                    <BrandWhiteIcon
+                        className={`relative w-[55%] max-w-md text-white drop-shadow-[0_0_40px_oklch(0.8_0.12_262/0.6)] ${styles.icon}`}
+                    />
+                </div>
+            )}
 
             {/* Floating voxel blocks */}
             {BLOCKS.map((b, i) => (

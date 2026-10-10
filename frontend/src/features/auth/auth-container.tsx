@@ -1,8 +1,8 @@
 import { BrandBlueIcon } from '@/components/icons/brand/blue-icon';
 import { BrandBlueWordmark } from '@/components/icons/brand/blue-wordmark';
 import type { ReactNode } from 'react';
-import { AuthBackdrop } from './auth-backdrop';
 import Link from 'next/link';
+import { BrandBackdrop } from '@/components/elements/brand-backdrop/brand-backdrop';
 
 type AuthContainerProps = {
     children: ReactNode;
@@ -26,7 +26,7 @@ export function AuthContainer({ children }: AuthContainerProps) {
                     <div className="w-full max-w-md">{children}</div>
                 </div>
             </div>
-            <AuthBackdrop />
+            <BrandBackdrop className="hidden lg:block" />
         </div>
     );
 }
