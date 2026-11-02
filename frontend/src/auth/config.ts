@@ -32,3 +32,6 @@ export const auth = betterAuth({
     },
     plugins: [admin(), organization(), jwt(), nextCookies()],
 });
+
+export type Organization = typeof auth.$Infer.Organization;
+export type User = (typeof auth.$Infer.Session)['user'];

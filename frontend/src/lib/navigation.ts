@@ -1,4 +1,5 @@
 import {
+    AtSignIcon,
     FolderIcon,
     GaugeIcon,
     HomeIcon,
@@ -8,6 +9,7 @@ import {
     SettingsIcon,
     ShieldCheckIcon,
     ShoppingCartIcon,
+    StoreIcon,
     UserIcon,
     UsersIcon,
     type LucideIcon,
@@ -35,6 +37,10 @@ export const MAIN_NAV: NavItem[] = [
         icon: ShoppingCartIcon,
     },
 ];
+
+export type SubNavItem = Omit<NavItem, 'icon'> & {
+    icon?: LucideIcon;
+};
 
 export const SUB_NAVS = {
     account: {
@@ -74,6 +80,27 @@ export const SUB_NAVS = {
             },
         ],
     },
+    creator: {
+        label: 'Creator',
+        items: [
+            {
+                label: 'Creator Overview',
+                href: '/creators',
+                icon: GaugeIcon,
+                exact: true,
+            },
+            {
+                label: 'Invitations',
+                href: '/creators/invitations',
+                icon: AtSignIcon,
+            },
+            {
+                label: 'Organizations',
+                href: '/creators/organizations',
+                icon: StoreIcon,
+            },
+        ],
+    },
     admin: {
         label: 'Admin',
         items: [
@@ -82,7 +109,7 @@ export const SUB_NAVS = {
             { label: 'Audit Log', href: '/admin/audit', icon: ScrollTextIcon },
         ],
     },
-} satisfies Record<string, { label: string; items: NavItem[] }>;
+} satisfies Record<string, { label: string; items: SubNavItem[] }>;
 
 export type SubNavKey = keyof typeof SUB_NAVS;
 

@@ -1,4 +1,6 @@
+import { SelectField } from '@/components/forms/select-field';
 import { SubmitButton } from '@/components/forms/submit-button';
+import { SwitchField } from '@/components/forms/switch-field';
 import { TextField } from '@/components/forms/text-field';
 import {
     createFormHookContexts,
@@ -11,6 +13,8 @@ const { fieldContext, formContext, useFieldContext, useFormContext } =
 const { useAppForm } = createFormHook({
     fieldComponents: {
         TextField,
+        SelectField,
+        SwitchField,
     },
     formComponents: {
         SubmitButton,

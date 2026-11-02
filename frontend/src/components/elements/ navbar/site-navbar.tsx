@@ -35,6 +35,7 @@ import {
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Container } from '../container';
 
 export function SiteNavbar() {
     const pathname = usePathname();
@@ -42,7 +43,7 @@ export function SiteNavbar() {
 
     return (
         <header className="sticky top-0 z-40 h-14 border-b bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60">
-            <div className="mx-auto flex h-full max-w-6xl items-center gap-3 px-4 sm:px-6">
+            <Container className="flex h-full items-center gap-3">
                 {/* Mobile menu */}
                 <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
                     <SheetTrigger
@@ -119,7 +120,7 @@ export function SiteNavbar() {
                 <div className="ml-auto flex items-center gap-2">
                     <UserMenu pathname={pathname} />
                 </div>
-            </div>
+            </Container>
         </header>
     );
 }
